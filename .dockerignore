@@ -1,0 +1,9 @@
+.venv
+.git
+__pycache__
+*.pyc
+*.pyo
+.env
+uploads/*
+test_*.jpg
+.DS_Store
