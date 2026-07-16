@@ -69,7 +69,7 @@ async def shutdown_event():
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
-    return templates.TemplateResponse("home.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="home.html", context={"request": request})
 
 @app.get("/dashboard", response_class=HTMLResponse)
 async def dashboard(request: Request):
@@ -78,22 +78,22 @@ async def dashboard(request: Request):
         "total_cams": len(pipelines) - 1,
         "total_detections": sum(p.stats.get("total_detections", 0) for p in pipelines),
     }
-    return templates.TemplateResponse("dashboard.html", context)
+    return templates.TemplateResponse(request=request, name="dashboard.html", context=context)
 
 @app.get("/live", response_class=HTMLResponse)
 async def live(request: Request):
-    return templates.TemplateResponse("live.html", {
+    return templates.TemplateResponse(request=request, name="live.html", context={
         "request": request,
         "camera_streams": STREAMS_LIST
     })
 
 @app.get("/architecture", response_class=HTMLResponse)
 async def architecture(request: Request):
-    return templates.TemplateResponse("architecture.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="architecture.html", context={"request": request})
 
 @app.get("/history", response_class=HTMLResponse)
 async def history(request: Request):
-    return templates.TemplateResponse("history.html", {
+    return templates.TemplateResponse(request=request, name="history.html", context={
         "request": request,
         "history": ALERT_HISTORY
     })
@@ -118,15 +118,15 @@ async def clear_logs():
 
 @app.get("/alerts", response_class=HTMLResponse)
 async def alerts_page(request: Request):
-    return templates.TemplateResponse("alerts.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="alerts.html", context={"request": request})
 
 @app.get("/analytics", response_class=HTMLResponse)
 async def analytics(request: Request):
-    return templates.TemplateResponse("analytics.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="analytics.html", context={"request": request})
 
 @app.get("/about", response_class=HTMLResponse)
 async def about(request: Request):
-    return templates.TemplateResponse("about.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="about.html", context={"request": request})
 
 @app.get("/video_feed/{idx}")
 async def video_feed(idx: int):
